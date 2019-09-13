@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "716478080440",
+    "firebase_url": "https://macarbidb.firebaseio.com",
+    "project_id": "macarbidb",
+    "storage_bucket": "macarbidb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716478080440:android:1f235accca6d5ad9",
+        "android_client_info": {
+          "package_name": "com.example.macarbi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716478080440-4tnt140faamla0967d1m35c5r9tmdmrt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.macarbi",
+            "certificate_hash": "1bb6b65aac460552d87de941b635a49d90a9577e"
+          }
+        },
+        {
+          "client_id": "716478080440-8ri0tju31jis6sdsbpqdcr2kvq9v7udr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTF59-nIjHetWTmHN6-a5v4lI3wz6hnc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716478080440-8ri0tju31jis6sdsbpqdcr2kvq9v7udr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
