@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference fdb;
     private FirebaseAuth fbAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    long childCount;
+    long childCount, childCountNK, childCountActiveTools, childCountConcept2, childCountCoxmate, childCountCroker, childCountHudson, childCountRowshop, childCountSwift;
     String pName;
     String PR;
     String pPrice;
-    String search, searchResult;
+    String search, searchResult="";
     private double Exchange, rands, weight, shipping;
     String pQTY;
     ListView lv;
@@ -79,30 +79,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //------ THIS CODE MAY NEED TO BE PLACED ON ALL ACTIVITIES, FOR NOW ONLY WORKS FROM MAINACTIVITY--------------
         fbAuth = FirebaseAuth.getInstance();
-                FirebaseUser user = fbAuth.getCurrentUser();
-                if (user != null) {
+        FirebaseUser user = fbAuth.getCurrentUser();
+        if (user != null) {
 
-                } else {
-                    NavigationView navigationView= findViewById(R.id.nav_view);
-                    Menu menuNav=navigationView.getMenu();
-                    MenuItem inv = menuNav.findItem(R.id.nav_invoices);
-                    MenuItem todo = menuNav.findItem(R.id.nav_todo);
-                   // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
-                    inv.setEnabled(false);
-                    todo.setEnabled(false);
-                }
+        } else {
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            Menu menuNav = navigationView.getMenu();
+            MenuItem inv = menuNav.findItem(R.id.nav_invoices);
+            MenuItem todo = menuNav.findItem(R.id.nav_todo);
+            // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
+            inv.setEnabled(false);
+            todo.setEnabled(false);
+        }
         lv = (ListView) findViewById(R.id.lvHome);
 
         fdb = FirebaseDatabase.getInstance().getReference();
 
-        sp = (Spinner)findViewById(R.id.spinner);
+        sp = (Spinner) findViewById(R.id.spinner);
         View v = findViewById(R.id.lvContent);
 //
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
                 // Your code for item clicks
                 int p = pos;
-                EditProduct.Cat=spValue;
+                EditProduct.Cat = spValue;
                 EditProduct.id = Integer.parseInt(name[p]);
                 startActivity(new Intent(MainActivity.this, EditProduct.class));
             }
@@ -115,16 +115,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Iterable<DataSnapshot> catChildren = catSnapshot.getChildren();
 
                 for (DataSnapshot contact : catChildren) {
-                list1.add(contact.getKey());
+                    list1.add(contact.getKey());
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        sp = (Spinner)findViewById(R.id.spinner);
+        sp = (Spinner) findViewById(R.id.spinner);
         list1.add("Please select a category");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 read();//calls the read method to fill Listview
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
@@ -157,12 +159,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer = findViewById(R.id.drawer_layout);
 
-        toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
 
-        NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
         //------------------------------------------------------------------
         //Start Search
@@ -171,59 +173,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 //run popup method
-                searchResult="";//clear the variable for use later
+
                 showAddItemDialog(MainActivity.this);
             }
         });
         //End Search
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item))
-        {
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-//Code for Drawer buttons
+
+    //Code for Drawer buttons
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
 
-        if(id==R.id.nav_Home)
-        {//   startActivity(new Intent(MainActivity.this, MainActivity.class));
+        if (id == R.id.nav_Home) {//   startActivity(new Intent(MainActivity.this, MainActivity.class));
 //            finish();
         }
-        if(id==R.id.nav_invoices)
-        {   startActivity(new Intent(MainActivity.this, Invoices.class));
+        if (id == R.id.nav_invoices) {
+            startActivity(new Intent(MainActivity.this, Invoices.class));
             finish();
         }
 
-        if(id==R.id.nav_lr)
-        {   startActivity(new Intent(MainActivity.this, Login.class));
+        if (id == R.id.nav_lr) {
+            startActivity(new Intent(MainActivity.this, Login.class));
             finish();
         }
 
-        if(id==R.id.nav_todo)
-        {   startActivity(new Intent(MainActivity.this, ToDo.class));
+        if (id == R.id.nav_todo) {
+            startActivity(new Intent(MainActivity.this, ToDo.class));
             finish();
         }
 
-        if(id==R.id.nav_website)
-        {   startActivity(new Intent(MainActivity.this, Website.class));
+        if (id == R.id.nav_website) {
+            startActivity(new Intent(MainActivity.this, Website.class));
             finish();
         }
-        if(id==R.id.nav_LO)
-        {
+        if (id == R.id.nav_LO) {
             fbAuth.getInstance().signOut();
             startActivity(new Intent(MainActivity.this, MainActivity.class));
             finish();
         }
-        if(id == R.id.nav_add_prod){
+        if (id == R.id.nav_add_prod) {
             startActivity(new Intent(MainActivity.this, activity_add_product.class));
             finish();
         }
-
 
 
         return false;
@@ -232,52 +232,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //----------END OF DRAWER CODE--------
 
     //read data from Firebase and insert into listview
-    public void read()
-    {
+    public void read() {
         fdb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 StringBuilder sb = new StringBuilder();
-                HashMap<String, String> pn= new LinkedHashMap<>();
+                HashMap<String, String> pn = new LinkedHashMap<>();
 
 
                 childCount = dataSnapshot.child("Products").child(spValue).getChildrenCount();//gets the number of items in child for the for loop
-                Toast.makeText(MainActivity.this,Long.toString(childCount),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, Long.toString(childCount), Toast.LENGTH_SHORT).show();//todo delete Toast count
 //              loops through all products
-                for(int i=0; i<=childCount-3; i++)
-                {
+                for (int i = 0; i <= childCount - 3; i++) {
                     pName = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Name").getValue(String.class);
                     pPrice = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Price").getValue(String.class);
                     pQTY = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Stock").getValue(String.class);
-//start search storage
-                    searchName.add(i,pName);
-                    searchPrice.add(i,pPrice);
-                    searchQty.add(i,pQTY);
 
-//end search storage
-                    if(spValue.equals("ActiveTools") || spValue.equals("Coxmate") || spValue.equals("NK")){
+                    if (spValue.equals("ActiveTools") || spValue.equals("Coxmate") || spValue.equals("NK")) {
                         weight = Double.parseDouble(dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Weight").getValue(String.class));
-                        Log.d("THIS IS VAL" , weight+"\t" + i +"");
+                        Log.d("THIS IS VAL", weight + "\t" + i + "");
                         shipping = dataSnapshot.child("Products").child(spValue).child("Shipping").getValue(Double.class);
                         Exchange = dataSnapshot.child("Products").child(spValue).child("Exchange Rate").getValue(Double.class);
-                        rands = (((((Double.parseDouble(pPrice)/1.1))*Exchange)+(((weight*shipping)*Exchange)
-                                +(((((Double.parseDouble(pPrice)/1.1))*Exchange)*1.1)*0.15))*((0.3)+((((Double.parseDouble(pPrice)/1.1))*Exchange)+(weight*shipping)*Exchange)+(((((Double.parseDouble(pPrice)/1.1))*Exchange)*1.1)*0.15))));
-                        PR = "R"+rands+"\n"+"QTY: "+pQTY;
-                        if(inactive.isChecked()){
-                            pn.put(pName,PR);
+                        rands = (((((Double.parseDouble(pPrice) / 1.1)) * Exchange) + (((weight * shipping) * Exchange)
+                                + (((((Double.parseDouble(pPrice) / 1.1)) * Exchange) * 1.1) * 0.15)) * ((0.3) + ((((Double.parseDouble(pPrice) / 1.1)) * Exchange) + (weight * shipping) * Exchange) + (((((Double.parseDouble(pPrice) / 1.1)) * Exchange) * 1.1) * 0.15))));
+                        PR = "R" + rands + "\n" + "QTY: " + pQTY;
+                        if (inactive.isChecked()) {
+                            pn.put(pName, PR);
                             sb.append(i + ",");
-                        }else if(!pName.contains(",")){
-                            pn.put(pName,PR);
+                        } else if (!pName.contains(",")) {
+                            pn.put(pName, PR);
                             sb.append(i + ",");
                         }
                     } else {
-                        PR = "R"+pPrice+"\n"+"QTY: "+pQTY;
-                        if(inactive.isChecked()){
-                            pn.put(pName,PR);
+                        PR = "R" + pPrice + "\n" + "QTY: " + pQTY;
+                        if (inactive.isChecked()) {
+                            pn.put(pName, PR);
                             sb.append(i + ",");
-                        }else if(!pName.contains(",")){
-                            pn.put(pName,PR);
+                        } else if (!pName.contains(",")) {
+                            pn.put(pName, PR);
                             sb.append(i + ",");
                         }
                     }
@@ -285,16 +278,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 sb.append("0");
                 name = sb.toString().split(",");
 
-                List<HashMap<String, String>>listItems = new ArrayList<>();
+                List<HashMap<String, String>> listItems = new ArrayList<>();
                 SimpleAdapter adapter = new SimpleAdapter(MainActivity.this, listItems, R.layout.list_item,
-                        new String [] {"First Line","Second Line"},
+                        new String[]{"First Line", "Second Line"},
                         new int[]{R.id.text1, R.id.text2});
 
                 Iterator it = pn.entrySet().iterator();
 
-                while (it.hasNext())
-                {
-                    HashMap <String, String> resultsMap = new LinkedHashMap<>();
+                while (it.hasNext()) {
+                    HashMap<String, String> resultsMap = new LinkedHashMap<>();
                     Map.Entry pair = (Map.Entry) it.next();
                     resultsMap.put("First Line", pair.getKey().toString());
                     resultsMap.put("Second Line", pair.getValue().toString());
@@ -306,12 +298,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
     }
+
     //search popup box and result popup box
     private void showAddItemDialog(Context c) {
         final EditText taskEditText = new EditText(c);
@@ -324,22 +316,108 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(DialogInterface dialog, int which) {
                         search = (taskEditText.getText()).toString();
 //todo searchResult here
-                        for(int i=0; i<=childCount-3; i++) {
-                            if (searchName.get(i).contains(search)) {
-                                searchResult += searchName.get(i)+"\nR"+searchPrice.get(i)+"\nQTY:"+searchQty.get(i)+"\n-------------------\n";
-                            }
-                        }if(searchResult==""){
-                            searchResult="No Product Found";
+                        //Start load all products
+
+
+                        try {
+                            fdb.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    childCountNK = dataSnapshot.child("Products").child("NK").getChildrenCount();//gets the number of items in child for the for loop
+                                    childCountActiveTools = dataSnapshot.child("Products").child("ActiveTools").getChildrenCount();
+                                    childCountConcept2 = dataSnapshot.child("Products").child("Conxept 2").getChildrenCount();
+                                    childCountCoxmate = dataSnapshot.child("Products").child("Coxmate").getChildrenCount();
+                                    childCountCroker = dataSnapshot.child("Products").child("Croker").getChildrenCount();
+                                    childCountHudson = dataSnapshot.child("Products").child("Hudson").getChildrenCount();
+                                    childCountRowshop = dataSnapshot.child("Products").child("Rowshop").getChildrenCount();
+                                    childCountSwift = dataSnapshot.child("Products").child("Swift").getChildrenCount();
+                                    //              loops through all products
+                                    for (int i = 0; i <= childCountNK - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "NK\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    for (int i = 0; i <= (int) childCountActiveTools - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "ActiveTools\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    for (int i = 0; i <= childCountConcept2 - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("Conxept 2").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("Conxept 2").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("Conxept 2").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "Concept 2\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    for (int i = 0; i <= childCountCoxmate - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "Coxmate\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    for (int i = 0; i <= childCountCroker - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("Croker").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("Croker").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("Croker").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "Croker\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    for (int i = 0; i <= childCountHudson - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("Hudson").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("Hudson").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("Hudson").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "Hudson\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    for (int i = 0; i <= childCountRowshop - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("Rowshop").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("Rowshop").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("Rowshop").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "RowShop\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    for (int i = 0; i <= childCountSwift - 3; i++) {
+                                        searchName.add(i, dataSnapshot.child("Products").child("Swift").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("Swift").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("Swift").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                            searchResult += "Swift\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                        }
+                                    }
+                                    showAddItemDialogResult(MainActivity.this);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Log.d("SEARCH", "ERROR: DB ERROR");
+                                }
+                            });
+                        } catch (Exception ex) {
+                            Log.d("SEARCH", "EXCEPTION: " + ex);
                         }
-//End searchResult
-                        showAddItemDialogResult(MainActivity.this);
+//
                     }
                 })
                 .setNegativeButton("Cancel", null)
                 .create();
         dialog.show();
+
     }
+
     private void showAddItemDialogResult(Context c) {
+
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle("SEARCH RESULT")
                 .setMessage(searchResult)
