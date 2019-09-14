@@ -1,11 +1,15 @@
 package com.example.macarbi;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -157,7 +162,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
         //------------------------------------------------------------------
-
+        //Start Search
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //run popup method
+                showAddItemDialog(MainActivity.this);
+            }
+        });
+        //End Search
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -288,5 +302,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+    }
+
+
+
+    private void showAddItemDialog(Context c) {
+        final EditText taskEditText = new EditText(c);
+        AlertDialog dialog = new AlertDialog.Builder(c)
+                .setTitle("SEARCH")
+                .setMessage("enter product name")
+                .setView(taskEditText)
+                .setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String search = (taskEditText.getText()).toString();
+
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.show();
     }
 }
