@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String pName;
     String PR;
     String pPrice;
-    String search=null, searchResult=null;
+    String search, searchResult;
     private double Exchange, rands, weight, shipping;
     String pQTY;
     ListView lv;
@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 //run popup method
+                searchResult="";//clear the variable for use later
                 showAddItemDialog(MainActivity.this);
             }
         });
@@ -316,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final EditText taskEditText = new EditText(c);
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle("SEARCH")
-                .setMessage("enter product name")
+                .setMessage("ENTER PRODUCT NAME")
                 .setView(taskEditText)
                 .setPositiveButton("Search", new DialogInterface.OnClickListener() {
                     @Override
@@ -324,10 +325,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         search = (taskEditText.getText()).toString();
 //todo searchResult here
                         for(int i=0; i<=childCount-3; i++) {
-                            if (searchName.contains(search)) {
-                                searchResult = searchName.get(i)+" R"+searchPrice.get(i)+" QTY:"+searchQty.get(i)+"\n";
+                            if (searchName.get(i).contains(search)) {
+                                searchResult += searchName.get(i)+"\nR"+searchPrice.get(i)+"\nQTY:"+searchQty.get(i)+"\n-------------------\n";
                             }
-                        }if(searchResult.equals(null)){
+                        }if(searchResult==""){
                             searchResult="No Product Found";
                         }
 //End searchResult
@@ -345,6 +346,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setNegativeButton("OK", null)
                 .create();
         dialog.show();
-        searchResult=null;//clear the variable for use later
+
     }
 }
