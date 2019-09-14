@@ -54,12 +54,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String pName;
     String PR;
     String pPrice;
+    String search=null, searchResult=null;
     private double Exchange, rands, weight, shipping;
     String pQTY;
     ListView lv;
     Spinner sp;
     String spValue;
-
+    List<String> searchName = new ArrayList<>();
+    List<String> searchPrice = new ArrayList<>();
+    List<String> searchQty = new ArrayList<>();
     private String[] name;
     private Context context;
 
@@ -246,7 +249,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     pName = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Name").getValue(String.class);
                     pPrice = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Price").getValue(String.class);
                     pQTY = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Stock").getValue(String.class);
+//start search storage
+                    searchName.add(i,pName);
+                    searchPrice.add(i,pPrice);
+                    searchQty.add(i,pQTY);
 
+//end search storage
                     if(spValue.equals("ActiveTools") || spValue.equals("Coxmate") || spValue.equals("NK")){
                         weight = Double.parseDouble(dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Weight").getValue(String.class));
                         Log.d("THIS IS VAL" , weight+"\t" + i +"");
@@ -303,9 +311,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
-
-
+    //search popup box and result popup box
     private void showAddItemDialog(Context c) {
         final EditText taskEditText = new EditText(c);
         AlertDialog dialog = new AlertDialog.Builder(c)
@@ -315,13 +321,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setPositiveButton("Search", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        String search = (taskEditText.getText()).toString();
-
+                        search = (taskEditText.getText()).toString();
+//todo searchResult here
+                        for(int i=0; i<=childCount-3; i++) {
+                            if (searchName.contains(search)) {
+                                searchResult = searchName.get(i)+" R"+searchPrice.get(i)+" QTY:"+searchQty.get(i)+"\n";
+                            }
+                        }if(searchResult.equals(null)){
+                            searchResult="No Product Found";
+                        }
+//End searchResult
+                        showAddItemDialogResult(MainActivity.this);
                     }
                 })
                 .setNegativeButton("Cancel", null)
                 .create();
         dialog.show();
+    }
+    private void showAddItemDialogResult(Context c) {
+        AlertDialog dialog = new AlertDialog.Builder(c)
+                .setTitle("SEARCH RESULT")
+                .setMessage(searchResult)
+                .setNegativeButton("OK", null)
+                .create();
+        dialog.show();
+        searchResult=null;//clear the variable for use later
     }
 }
