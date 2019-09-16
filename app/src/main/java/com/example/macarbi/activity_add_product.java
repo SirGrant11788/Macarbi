@@ -143,8 +143,17 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
             save.writeProd();
         } else {
             for (int i = 0; i<1; i++)
-            Toast.makeText(activity_add_product.this,"Please select a catagory",Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity_add_product.this,"Please select a category",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -193,12 +202,5 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
         return false;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item))
-        {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }

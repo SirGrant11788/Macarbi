@@ -63,12 +63,16 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
 
         } else {
             NavigationView navigationView= findViewById(R.id.nav_view);
-            Menu menuNav=navigationView.getMenu();
+            Menu menuNav = navigationView.getMenu();
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
+            MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
+            MenuItem edit = menuNav.findItem(R.id.nav_currency);
             // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
             todo.setEnabled(false);
+            Add.setEnabled(false);
+            edit.setEnabled(false);
         }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
