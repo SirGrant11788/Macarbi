@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             pn.put(pName, PR);
                             sb.append(i + ",");
                         } else if (!pName.contains(",")) {
+
                             pn.put(pName, PR);
                             sb.append(i + ",");
                         }
@@ -330,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     childCountNK = dataSnapshot.child("Products").child("NK").getChildrenCount();//gets the number of items in child for the for loop
                                     childCountActiveTools = dataSnapshot.child("Products").child("ActiveTools").getChildrenCount();
-                                    childCountConcept2 = dataSnapshot.child("Products").child("Conxept 2").getChildrenCount();
+                                    childCountConcept2 = dataSnapshot.child("Products").child("Concept 2").getChildrenCount();
                                     childCountCoxmate = dataSnapshot.child("Products").child("Coxmate").getChildrenCount();
                                     childCountCroker = dataSnapshot.child("Products").child("Croker").getChildrenCount();
                                     childCountHudson = dataSnapshot.child("Products").child("Hudson").getChildrenCount();
@@ -354,9 +355,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         }
                                     }
                                     for (int i = 0; i <= childCountConcept2 - 3; i++) {
-                                        searchName.add(i, dataSnapshot.child("Products").child("Conxept 2").child(Integer.toString(i)).child("Name").getValue(String.class));
-                                        searchPrice.add(i, dataSnapshot.child("Products").child("Conxept 2").child(Integer.toString(i)).child("Price").getValue(String.class));
-                                        searchQty.add(i, dataSnapshot.child("Products").child("Conxept 2").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        searchName.add(i, dataSnapshot.child("Products").child("Concept 2").child(Integer.toString(i)).child("Name").getValue(String.class));
+                                        searchPrice.add(i, dataSnapshot.child("Products").child("Concept 2").child(Integer.toString(i)).child("Price").getValue(String.class));
+                                        searchQty.add(i, dataSnapshot.child("Products").child("Concept 2").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
                                             searchResult += "Concept 2\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
