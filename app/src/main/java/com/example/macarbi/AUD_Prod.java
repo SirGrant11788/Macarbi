@@ -8,10 +8,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.jar.Attributes;
 
 public class AUD_Prod {
+
     private DatabaseReference fdb;
     private String name, price, cat;
     private int quantity, id;
     private long lID;
+    private double exchange, shipping;
+
+    public AUD_Prod(String Cat, String Name, String Price, int Quantity, long ID, double exchange, double shipping){
+        name = Name;
+        price = Price;
+        quantity = Quantity;
+        cat = Cat;
+        lID = ID;
+        this.exchange = exchange;
+        this.shipping = shipping;
+    }
     public AUD_Prod(String Cat, String Name, String Price, int Quantity, long ID){
         name = Name;
         price = Price;
@@ -41,6 +53,8 @@ public class AUD_Prod {
         fdb.child("Products").child(cat).child(Integer.toString(id)).child("Name").setValue(name);
         fdb.child("Products").child(cat).child(Integer.toString(id)).child("Price").setValue(price);
         fdb.child("Products").child(cat).child(Integer.toString(id)).child("Stock").setValue(Integer.toString(quantity));
+        fdb.child("Products").child(cat).child("Exchange Rate").setValue(exchange);
+        fdb.child("Products").child(cat).child("Shipping").setValue(shipping);
     }
 
     public void deleteProd(){

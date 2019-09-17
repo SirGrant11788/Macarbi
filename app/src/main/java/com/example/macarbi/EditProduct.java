@@ -37,19 +37,16 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
     String pName;
     String pPrice;
     String pQTY;
+    String pExchange;
+    String pShipping;
 
     TextView tvProduct;
     EditText ETprice;
     EditText ETqty;
+    EditText ETExchange;
+    EditText ETShipping;
     Button   btnSaveEdit, btnDelete;
 
-//    public void proDets(int ID, String cat)
-//    {
-//        id = ID;
-//        Cat = "sadfsa";
-//
-//
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +56,8 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
         tvProduct = findViewById(R.id.textView_Name);
         ETprice =  findViewById(R.id.edit_text_price);
         ETqty =  findViewById(R.id.edit_text_quantity);
+        ETExchange = findViewById(R.id.edit_text_exchange);
+        ETShipping = findViewById(R.id.edit_text_shipping);
         fbAuth = FirebaseAuth.getInstance();
         fbAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fbAuth.getCurrentUser();
@@ -83,7 +82,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
-                        id);
+                        id, Double.parseDouble(ETExchange.getText().toString()), Double.parseDouble(ETShipping.getText().toString()));
                 update.updateProd();
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Regular price").setValue(ETprice.getText().toString());
@@ -184,12 +183,13 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                pPrice = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Regular price").getValue(String.class);
                Toast.makeText(EditProduct.this, pName +"\t\t" + pPrice, Toast.LENGTH_LONG).show();
                pQTY = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").getValue(String.class);
-
+               pExchange = dataSnapshot.child("Products").child(Cat).child("Exchange Rate").getValue(double.class).toString();
+               pShipping = dataSnapshot.child("Products").child(Cat).child("Shipping").getValue(double.class).toString();
                 tvProduct.setText(pName);
                 ETprice.setText(pPrice);
                 ETqty.setText(pQTY);
-
-
+                ETExchange.setText(pExchange);
+                ETShipping.setText(pShipping);
             }
 
             @Override
