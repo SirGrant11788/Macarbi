@@ -259,18 +259,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Log.d("THIS IS VAL", weight + "\t" + i + "");
                         shipping = dataSnapshot.child("Products").child(spValue).child("Shipping").getValue(Double.class);
                         Exchange = dataSnapshot.child("Products").child(spValue).child("Exchange Rate").getValue(Double.class);
-                        rands = (((((Double.parseDouble(pPrice) / 1.1)) * Exchange) + (((weight * shipping) * Exchange)
-                                + (((((Double.parseDouble(pPrice) / 1.1)) * Exchange) * 1.1) * 0.15)) * ((0.3) + ((((Double.parseDouble(pPrice) / 1.1)) * Exchange) + (weight * shipping) * Exchange) + (((((Double.parseDouble(pPrice) / 1.1)) * Exchange) * 1.1) * 0.15))));
-                        PR = "R" + rands + "\n" + "QTY: " + pQTY;
+
+                        double cpr = Double.parseDouble(pPrice) * Exchange;
+                        double scd = weight * shipping;
+                        double scr = scd * Exchange;
+                        double iv = (cpr * 1.1)*0.15;
+                        double ctu = cpr + scr + iv;
+                        double ctc = Math.round(ctu + (ctu*0.3));
+                        String rand = String.format("%.2f", ctc);
+                        PR = "R" + rand + "\n" + "QTY: " + pQTY;
                         if (inactive.isChecked()) {
                             pn.put(pName, PR);
                             sb.append(i + ",");
                         } else if (!pName.contains(",")) {
-
                             pn.put(pName, PR);
                             sb.append(i + ",");
                         }
                     } else {
+                        pName = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Name").getValue(String.class);
+                        pPrice = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Regular price").getValue(String.class);
+                        pQTY = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Stock").getValue(String.class);
                         PR = "R" + pPrice + "\n" + "QTY: " + pQTY;
                         if (inactive.isChecked()) {
                             pn.put(pName, PR);
