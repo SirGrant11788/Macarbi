@@ -81,9 +81,15 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
         btnSaveEdit = (Button) findViewById(R.id.button_save_edit);
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
+                if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
                 update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
                         id, Double.parseDouble(ETExchange.getText().toString()), Double.parseDouble(ETShipping.getText().toString()));
                 update.updateProd();
+                } else {
+                    update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
+                            id);
+                    update.updateProdLocal();
+                }
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Regular price").setValue(ETprice.getText().toString());
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").setValue(ETqty.getText().toString());
@@ -180,16 +186,22 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                pName = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Name").getValue(String.class);
-               pPrice = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Regular price").getValue(String.class);
+               pPrice = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Price").getValue(String.class);
                Toast.makeText(EditProduct.this, pName +"\t\t" + pPrice, Toast.LENGTH_LONG).show();
                pQTY = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").getValue(String.class);
-               pExchange = dataSnapshot.child("Products").child(Cat).child("Exchange Rate").getValue(double.class).toString();
-               pShipping = dataSnapshot.child("Products").child(Cat).child("Shipping").getValue(double.class).toString();
+               if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
+                   pExchange = dataSnapshot.child("Products").child(Cat).child("Exchange Rate").getValue(double.class).toString();
+                   pShipping = dataSnapshot.child("Products").child(Cat).child("Shipping").getValue(double.class).toString();
+                   ETExchange.setText(pExchange);
+                   ETShipping.setText(pShipping);
+               } else {
+                   ETExchange.setText("N/A");
+                   ETShipping.setText("N/A");
+               }
                 tvProduct.setText(pName);
                 ETprice.setText(pPrice);
                 ETqty.setText(pQTY);
-                ETExchange.setText(pExchange);
-                ETShipping.setText(pShipping);
+
             }
 
             @Override

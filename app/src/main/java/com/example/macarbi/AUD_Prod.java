@@ -56,6 +56,12 @@ public class AUD_Prod {
         fdb.child("Products").child(cat).child("Exchange Rate").setValue(exchange);
         fdb.child("Products").child(cat).child("Shipping").setValue(shipping);
     }
+    public void updateProdLocal(){
+        fdb = FirebaseDatabase.getInstance().getReference();
+        fdb.child("Products").child(cat).child(Integer.toString(id)).child("Name").setValue(name);
+        fdb.child("Products").child(cat).child(Integer.toString(id)).child("Price").setValue(price);
+        fdb.child("Products").child(cat).child(Integer.toString(id)).child("Stock").setValue(Integer.toString(quantity));
+    }
 
     public void deleteProd(){
         fdb = FirebaseDatabase.getInstance().getReference();

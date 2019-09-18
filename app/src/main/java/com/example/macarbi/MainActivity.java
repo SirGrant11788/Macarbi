@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         inactive = findViewById(R.id.checkbox_show_inactive);
-        //tracking the sign in and singn out operations
+         //tracking the sign in and singn out operations
 
         //------ THIS CODE MAY NEED TO BE PLACED ON ALL ACTIVITIES, FOR NOW ONLY WORKS FROM MAINACTIVITY--------------
         fbAuth = FirebaseAuth.getInstance();
@@ -276,9 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             sb.append(i + ",");
                         }
                     } else {
-                        pName = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Name").getValue(String.class);
-                        pPrice = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Regular price").getValue(String.class);
-                        pQTY = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Stock").getValue(String.class);
+
                         PR = "R" + pPrice + "\n" + "QTY: " + pQTY;
                         if (inactive.isChecked()) {
                             pn.put(pName, PR);
@@ -441,3 +439,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 }
+/*cost price rands = dollar * exchange
+shipping cost dollar = weight * shipping (dollars)
+shipping cost rands = shipping * exchange
+import vat = (cost price rands * 1.1) *0,15
+cost to us = cost price rands + shipping cost rands + import vat*/
