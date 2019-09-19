@@ -62,7 +62,7 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
-            todo.setEnabled(false);
+            //todo.setEnabled(false);
         }
 
         button.setOnClickListener(new View.OnClickListener() {

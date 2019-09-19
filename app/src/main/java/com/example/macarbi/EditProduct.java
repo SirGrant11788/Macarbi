@@ -72,7 +72,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             MenuItem edit = menuNav.findItem(R.id.nav_currency);
             // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
-            todo.setEnabled(false);
+            //todo.setEnabled(false);
             Add.setEnabled(false);
             edit.setEnabled(false);
         }

@@ -66,7 +66,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
-            todo.setEnabled(false);
+           // todo.setEnabled(false);
         }
 
         //--------------- Navigation Drawer -----------------------------

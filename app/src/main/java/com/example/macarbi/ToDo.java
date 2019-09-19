@@ -1,10 +1,12 @@
 package com.example.macarbi;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -43,9 +47,11 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
     ListView lv;
     String Titlestr;
     String Contentstr;
-
+    String text;
+    String[] note;
     List<String> ListTitle = new ArrayList<String>();
     List<String> ListContent = new ArrayList<String>();
+    String child;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +84,35 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View view) {
                 saveNote();
+            }
+        });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
+                // Your code for item clicks
+                int p = pos;
+                text = lv.getItemAtPosition(p).toString();
 
 
+                AlertDialog dialog = new AlertDialog.Builder(ToDo.this)
+                        .setTitle("DELETE NOTE")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                note=text.split(",");
+                                note=note[1].split("=");
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append(note[1]);
+                                sb.deleteCharAt(note[1].length() -1);
+                                child = sb.toString();
+                                deleteNote();
+                                //fdb.child("Notes").child(child).child("Contents").setValue("Test");
+                                Toast.makeText(ToDo.this, "|" +child + "|", Toast.LENGTH_LONG).show();
+
+                            }})
+                        .setNegativeButton("Cancel", null)
+                        .create();
+                dialog.show();
             }
         });
 
@@ -124,54 +157,26 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
 
         if(id==R.id.nav_Home)
         {
-
-
-
-
             startActivity(new Intent(ToDo.this, MainActivity.class));
             finish();
-
         }
 
         if(id==R.id.nav_invoices)
         {
-
-
             startActivity(new Intent(ToDo.this, Invoices.class));
             finish();
         }
 
         if(id==R.id.nav_lr)
         {
-
-
-
-
             startActivity(new Intent(ToDo.this, Login.class));
             finish();
-
-        }
-
-        if(id==R.id.nav_todo)
-        {
-
-
-
-//
-//            startActivity(new Intent(ToDo.this, ToDo.class));
-//            finish();
-
         }
 
         if(id==R.id.nav_website)
         {
-
-
-
-
             startActivity(new Intent(ToDo.this, Website.class));
             finish();
-
         }
         if(id==R.id.nav_LO)
         {
@@ -179,9 +184,6 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
             startActivity(new Intent(ToDo.this, MainActivity.class));
             finish();
         }
-
-
-
         return false;
     }
     private void saveNote()
@@ -206,6 +208,30 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
 
     }
 
+    private void deleteNote()
+    {
+        fdb.child("Notes").child(child).child("Contents").setValue("Test");
+        fdb.child("Notes").child(child).child("Contents").removeValue();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query applesQuery = ref.child("Notes").orderByChild(child).equalTo(child);
+        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                    appleSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
     private void readNotes()
 
     {
@@ -223,7 +249,7 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
                     ListTitle.add(Titlestr);
                     Contentstr = (dataSnapshot.child("Notes").child(contact.getKey()).child("Contents").getValue(String.class));
                     ListContent.add(Contentstr);
-                    pn.put(Titlestr.toUpperCase(),Contentstr);
+                    pn.put(Titlestr,Contentstr);
                 }
 
 
