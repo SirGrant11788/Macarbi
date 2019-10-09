@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     List<String> searchName = new ArrayList<>();
     List<String> searchPrice = new ArrayList<>();
     List<String> searchQty = new ArrayList<>();
+    List<String> searchWeight = new ArrayList<>();
     private String[] name;
     private Context context;
 
@@ -348,16 +349,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchName.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        searchWeight.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Weight").getValue(String.class));
+                                        double shippingSearch = dataSnapshot.child("Products").child("NK").child("Shipping").getValue(Double.class);
+                                        double ExchangeSearch = dataSnapshot.child("Products").child("NK").child("Exchange Rate").getValue(Double.class);
+
+                                        double cpr = Double.parseDouble(searchPrice.get(i)) * ExchangeSearch;
+                                        double scd = Double.parseDouble(searchWeight.get(i)) * shippingSearch;
+                                        double scr = scd * ExchangeSearch;
+                                        double iv = (cpr * 1.1)*0.15;
+                                        double ctu = cpr + scr + iv;
+                                        double ctc = Math.round(ctu + (ctu*0.3));
+                                        String rand = String.format("%.2f", ctc);
                                         if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
-                                            searchResult += "NK\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResult += "NK\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
                                     for (int i = 0; i <= (int) childCountActiveTools - 3; i++) {
                                         searchName.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        searchWeight.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Weight").getValue(String.class));
+                                        double shippingSearch = dataSnapshot.child("Products").child("ActiveTools").child("Shipping").getValue(Double.class);
+                                        double ExchangeSearch = dataSnapshot.child("Products").child("ActiveTools").child("Exchange Rate").getValue(Double.class);
+
+                                        double cpr = Double.parseDouble(searchPrice.get(i)) * ExchangeSearch;
+                                        double scd = Double.parseDouble(searchWeight.get(i)) * shippingSearch;
+                                        double scr = scd * ExchangeSearch;
+                                        double iv = (cpr * 1.1)*0.15;
+                                        double ctu = cpr + scr + iv;
+                                        double ctc = Math.round(ctu + (ctu*0.3));
+                                        String rand = String.format("%.2f", ctc);
                                         if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
-                                            searchResult += "ActiveTools\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResult += "ActiveTools\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
                                     for (int i = 0; i <= childCountConcept2 - 3; i++) {
@@ -372,8 +395,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchName.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Stock").getValue(String.class));
+                                        searchWeight.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Weight").getValue(String.class));
+                                        double shippingSearch = dataSnapshot.child("Products").child("Coxmate").child("Shipping").getValue(Double.class);
+                                        double ExchangeSearch = dataSnapshot.child("Products").child("Coxmate").child("Exchange Rate").getValue(Double.class);
+
+                                        double cpr = Double.parseDouble(searchPrice.get(i)) * ExchangeSearch;
+                                        double scd = Double.parseDouble(searchWeight.get(i)) * shippingSearch;
+                                        double scr = scd * ExchangeSearch;
+                                        double iv = (cpr * 1.1)*0.15;
+                                        double ctu = cpr + scr + iv;
+                                        double ctc = Math.round(ctu + (ctu*0.3));
+                                        String rand = String.format("%.2f", ctc);
                                         if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
-                                            searchResult += "Coxmate\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResult += "Coxmate\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
                                     for (int i = 0; i <= childCountCroker - 3; i++) {
