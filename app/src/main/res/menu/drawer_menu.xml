@@ -22,9 +22,9 @@
         <item
             android:id="@+id/nav_LO"
             android:title="Logout" />
-        <item
-            android:id="@+id/nav_currency"
-            android:title="Edit Currency/Shipping"/>
+        <!--<item-->
+            <!--android:id="@+id/nav_currency"-->
+            <!--android:title="Edit Currency/Shipping"/>-->
         <item
             android:id="@+id/nav_add_prod"
             android:title="Add product"/>
