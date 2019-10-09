@@ -40,6 +40,8 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
     private DatabaseReference fdb;
     private FirebaseAuth fbAuth;
 
+    private String name, price, qty;
+
     private long childCount;
     private List<String> list1 = new ArrayList<String>();
 
@@ -54,6 +56,13 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
                 addProduct();
             }
         });
+        pName = (TextView) findViewById(R.id.product_name);
+        pPrice = (TextView) findViewById(R.id.product_price);
+        pQuantity = (TextView) findViewById(R.id.product_quantity);
+
+        pName.setHint("Name");
+        pPrice.setHint("Price");
+        pQuantity.setHint("Quantity");
         fdb = FirebaseDatabase.getInstance().getReference();
         fbAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fbAuth.getCurrentUser();
@@ -135,16 +144,27 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
     }
 
     private void addProduct(){
-        pName = (TextView) findViewById(R.id.product_name);
-        pPrice = (TextView) findViewById(R.id.product_price);
-        pQuantity = (TextView) findViewById(R.id.product_quantity);
-        if(!prod.getSelectedItem().toString().equals("Please select a category")) {
-            save = new AUD_Prod(prod.getSelectedItem().toString(), pName.getText().toString(), pPrice.getText().toString(), Integer.parseInt(pQuantity.getText().toString()), childCount);
-            save.writeProd();
-        } else {
-            for (int i = 0; i<1; i++)
-            Toast.makeText(activity_add_product.this,"Please select a category",Toast.LENGTH_SHORT).show();
-        }
+
+
+        name = pName.getText().toString();
+        price = pPrice.getText().toString();
+        qty = pQuantity.getText().toString();
+
+
+//        if(!prod.getSelectedItem().toString().equals("Please select a category")) {
+//            save = new AUD_Prod(prod.getSelectedItem().toString(), pName.getText().toString(), pPrice.getText().toString(), Integer.parseInt(pQuantity.getText().toString()), childCount);
+//            save.writeProd();
+//        } else {
+//            for (int i = 0; i<1; i++)
+//            Toast.makeText(activity_add_product.this,"Please select a category",Toast.LENGTH_SHORT).show();
+//        }
+
+       if (prod.getSelectedItem().toString()!="Please select a category") {
+           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Name").setValue(name);
+           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Price").setValue(price);
+           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Stock").setValue(qty);
+           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Weight").setValue("1");
+       }
     }
 
     @Override
@@ -189,11 +209,11 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
             startActivity(new Intent(activity_add_product.this, MainActivity.class));
             finish();
         }
-        if(id==R.id.nav_currency)
-        {
-            startActivity(new Intent(activity_add_product.this, activity_currency.class));
-            finish();
-        }
+//        if(id==R.id.nav_currency)
+//        {
+//            startActivity(new Intent(activity_add_product.this, activity_currency.class));
+//            finish();
+//        }
 //        if(id==R.id.nav_add_prod)
 //        {
 //            startActivity(new Intent(activity_add_product.this, activity_add_product.class));

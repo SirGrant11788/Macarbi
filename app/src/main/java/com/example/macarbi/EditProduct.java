@@ -69,12 +69,12 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
-            MenuItem edit = menuNav.findItem(R.id.nav_currency);
+            //MenuItem edit = menuNav.findItem(R.id.nav_currency);
             // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
             //todo.setEnabled(false);
             Add.setEnabled(false);
-            edit.setEnabled(false);
+            //edit.setEnabled(false);
         }
         read();
         bsp = findViewById(R.id.brand_spinner);
@@ -143,12 +143,12 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             startActivity(new Intent(EditProduct.this, MainActivity.class));
             finish();
         }
-        if(id==R.id.nav_currency)
-        {
-            fbAuth.getInstance().signOut();
-            startActivity(new Intent(EditProduct.this, activity_currency.class));
-            finish();
-        }
+//        if(id==R.id.nav_currency)
+//        {
+//            fbAuth.getInstance().signOut();
+//            startActivity(new Intent(EditProduct.this, activity_currency.class));
+//            finish();
+//        }
         if(id==R.id.nav_invoices)
         {
             startActivity(new Intent(EditProduct.this, Invoices.class));
