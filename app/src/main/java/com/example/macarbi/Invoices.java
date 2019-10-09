@@ -107,6 +107,18 @@ public class Invoices extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Invoices.this, MainActivity.class));
             finish();
         }
+
+//        if(id==R.id.nav_currency)
+//        {
+//            //startActivity(new Intent(Invoices.this, activity_currency.class));
+//            finish();
+//        }
+        if(id==R.id.nav_add_prod)
+        {
+            startActivity(new Intent(Invoices.this, activity_add_product.class));
+            finish();
+        }
+
         return false;
     }
 }

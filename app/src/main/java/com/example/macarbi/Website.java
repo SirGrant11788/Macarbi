@@ -123,6 +123,12 @@ public class Website extends AppCompatActivity implements NavigationView.OnNavig
             startActivity(new Intent(Website.this, MainActivity.class));
             finish();
         }
+
+        if(id==R.id.nav_add_prod)
+        {
+            startActivity(new Intent(Website.this, activity_add_product.class));
+            finish();
+        }
         return false;
     }
 }

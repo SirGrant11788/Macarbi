@@ -194,11 +194,11 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
             startActivity(new Intent(activity_add_product.this, activity_currency.class));
             finish();
         }
-        if(id==R.id.nav_add_prod)
-        {
-            startActivity(new Intent(activity_add_product.this, activity_add_product.class));
-            finish();
-        }
+//        if(id==R.id.nav_add_prod)
+//        {
+//            startActivity(new Intent(activity_add_product.this, activity_add_product.class));
+//            finish();
+//        }
         return false;
     }
 

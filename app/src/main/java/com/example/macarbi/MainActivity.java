@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 childCount = dataSnapshot.child("Products").child(spValue).getChildrenCount();//gets the number of items in child for the for loop
                 Toast.makeText(MainActivity.this, Long.toString(childCount), Toast.LENGTH_SHORT).show();//todo delete Toast count
 //              loops through all products
-                for (int i = 0; i <= childCount - 3; i++) {
+                for (int i = 0; i <= childCount -3; i++) {
                     pName = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Name").getValue(String.class);
                     pPrice = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Price").getValue(String.class);
                     pQTY = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Stock").getValue(String.class);

@@ -160,19 +160,21 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
             startActivity(new Intent(ToDo.this, MainActivity.class));
             finish();
         }
-
         if(id==R.id.nav_invoices)
         {
             startActivity(new Intent(ToDo.this, Invoices.class));
             finish();
         }
-
         if(id==R.id.nav_lr)
         {
             startActivity(new Intent(ToDo.this, Login.class));
             finish();
         }
-
+        if(id==R.id.nav_todo)
+        {
+            startActivity(new Intent(ToDo.this, ToDo.class));
+            finish();
+        }
         if(id==R.id.nav_website)
         {
             startActivity(new Intent(ToDo.this, Website.class));
@@ -180,8 +182,17 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
         }
         if(id==R.id.nav_LO)
         {
-            fbAuth.getInstance().signOut();
             startActivity(new Intent(ToDo.this, MainActivity.class));
+            finish();
+        }
+//        if(id==R.id.nav_currency)
+//        {
+//            startActivity(new Intent(ToDo.this, activity_currency.class));
+//            finish();
+//        }
+        if(id==R.id.nav_add_prod)
+        {
+            startActivity(new Intent(ToDo.this, activity_add_product.class));
             finish();
         }
         return false;

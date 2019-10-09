@@ -159,11 +159,11 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
         }
-        if(id==R.id.nav_currency)
-        {
-            startActivity(new Intent(Login.this, activity_currency.class));
-            finish();
-        }
+//        if(id==R.id.nav_currency)
+//        {
+//           // startActivity(new Intent(Login.this, activity_currency.class));
+//            finish();
+//        }
         if(id==R.id.nav_add_prod)
         {
             startActivity(new Intent(Login.this, activity_add_product.class));
