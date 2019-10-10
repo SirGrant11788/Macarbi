@@ -53,8 +53,8 @@
 
         <ListView
             android:id="@+id/lvHome"
-            android:layout_width="402dp"
-            android:layout_height="461dp"
+            android:layout_width="401dp"
+            android:layout_height="448dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
@@ -62,8 +62,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/second_top_guideline"
-            app:layout_constraintVertical_bias="0.923" />
+            app:layout_constraintTop_toTopOf="@+id/second_top_guideline" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"

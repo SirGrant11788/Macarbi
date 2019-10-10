@@ -69,12 +69,12 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
-            MenuItem edit = menuNav.findItem(R.id.nav_currency);
+            //MenuItem edit = menuNav.findItem(R.id.nav_currency);
             // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
             //todo.setEnabled(false);
             Add.setEnabled(false);
-            edit.setEnabled(false);
+            //edit.setEnabled(false);
         }
         read();
         bsp = findViewById(R.id.brand_spinner);
@@ -143,12 +143,12 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             startActivity(new Intent(EditProduct.this, MainActivity.class));
             finish();
         }
-        if(id==R.id.nav_currency)
-        {
-            fbAuth.getInstance().signOut();
-            startActivity(new Intent(EditProduct.this, activity_currency.class));
-            finish();
-        }
+//        if(id==R.id.nav_currency)
+//        {
+//            fbAuth.getInstance().signOut();
+//            startActivity(new Intent(EditProduct.this, activity_currency.class));
+//            finish();
+//        }
         if(id==R.id.nav_invoices)
         {
             startActivity(new Intent(EditProduct.this, Invoices.class));
@@ -175,6 +175,17 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             startActivity(new Intent(EditProduct.this, MainActivity.class));
             finish();
         }
+
+//        if(id==R.id.nav_currency)
+//        {
+//           // startActivity(new Intent(EditProduct.this, activity_currency.class));
+//            finish();
+//        }
+        if(id==R.id.nav_add_prod)
+        {
+            startActivity(new Intent(EditProduct.this, activity_add_product.class));
+            finish();
+        }
         return false;
     }
 
@@ -187,7 +198,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                 // whenever data at this location is updated.
                pName = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Name").getValue(String.class);
                pPrice = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Price").getValue(String.class);
-               Toast.makeText(EditProduct.this, pName +"\t\t" + pPrice, Toast.LENGTH_LONG).show();
+               Toast.makeText(EditProduct.this, Integer.toString(id), Toast.LENGTH_LONG).show();
                pQTY = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").getValue(String.class);
                if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
                    pExchange = dataSnapshot.child("Products").child(Cat).child("Exchange Rate").getValue(double.class).toString();

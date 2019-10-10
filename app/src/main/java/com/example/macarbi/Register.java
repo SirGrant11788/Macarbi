@@ -168,6 +168,16 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Register.this, MainActivity.class));
             finish();
         }
+//        if(id==R.id.nav_currency)
+//        {
+//            startActivity(new Intent(Register.this, activity_currency.class));
+//            finish();
+//        }
+        if(id==R.id.nav_add_prod)
+        {
+            startActivity(new Intent(Register.this, activity_add_product.class));
+            finish();
+        }
 
 
 

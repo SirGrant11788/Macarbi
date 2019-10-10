@@ -39,12 +39,12 @@ public class Website extends AppCompatActivity implements NavigationView.OnNavig
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
-            MenuItem edit = menuNav.findItem(R.id.nav_currency);
+           // MenuItem edit = menuNav.findItem(R.id.nav_currency);
             // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
             //todo.setEnabled(false);
             Add.setEnabled(false);
-            edit.setEnabled(false);
+           // edit.setEnabled(false);
         }
         try {
             webView = (WebView) findViewById(R.id.Macarbi_webview);
@@ -127,6 +127,12 @@ public class Website extends AppCompatActivity implements NavigationView.OnNavig
         {
             fbAuth.getInstance().signOut();
             startActivity(new Intent(Website.this, MainActivity.class));
+            finish();
+        }
+
+        if(id==R.id.nav_add_prod)
+        {
+            startActivity(new Intent(Website.this, activity_add_product.class));
             finish();
         }
         return false;
