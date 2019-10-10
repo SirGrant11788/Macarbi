@@ -1,6 +1,7 @@
 package com.example.macarbi;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -45,12 +46,17 @@ public class Website extends AppCompatActivity implements NavigationView.OnNavig
             Add.setEnabled(false);
             edit.setEnabled(false);
         }
-        webView = (WebView) findViewById(R.id.Macarbi_webview);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.Macarbi.com"); // enter website URL here
+        try {
+            webView = (WebView) findViewById(R.id.Macarbi_webview);
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl("https://www.Macarbi.com"); // enter website URL here
 
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+            WebSettings webSettings = webView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+        }catch (Exception ex){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://macarbi.com"));
+            startActivity(browserIntent);
+        }
 
         //--------------- Navigation Drawer -----------------------------
 
