@@ -50,8 +50,8 @@
 
         <ListView
             android:id="@+id/lvHome"
-            android:layout_width="396dp"
-            android:layout_height="663dp"
+            android:layout_width="371dp"
+            android:layout_height="647dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/spinner"
             app:layout_constraintHorizontal_bias="0.476"
