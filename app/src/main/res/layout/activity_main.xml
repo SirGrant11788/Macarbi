@@ -40,34 +40,30 @@
             android:id="@+id/appCompatImageView"
             android:layout_width="245dp"
             android:layout_height="57dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.455"
+            app:layout_constraintHorizontal_bias="0.525"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/top_guideline"
             app:srcCompat="@drawable/mac2" />
 
         <ListView
             android:id="@+id/lvHome"
-            android:layout_width="402dp"
-            android:layout_height="461dp"
-            android:layout_marginStart="4dp"
+            android:layout_width="396dp"
+            android:layout_height="663dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bottom_guideline"
-            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
-            app:layout_constraintRight_toRightOf="@+id/right_guideline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/second_top_guideline"
-            app:layout_constraintVertical_bias="0.923" />
+            app:layout_constraintEnd_toEndOf="@+id/spinner"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="@+id/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"
             android:layout_width="51dp"
             android:layout_height="50dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
             android:clickable="true"
             app:backgroundTint="#0098AB"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,22 +74,19 @@
             android:id="@+id/spinner"
             android:layout_width="355dp"
             android:layout_height="31dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/second_top_guideline"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/checkbox_show_inactive"
             app:layout_constraintStart_toStartOf="@+id/checkbox_show_inactive"
-            app:layout_constraintTop_toBottomOf="@+id/checkbox_show_inactive"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_show_inactive" />
 
         <CheckBox
             android:id="@+id/checkbox_show_inactive"
             android:layout_width="362dp"
             android:layout_height="44dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:text="Check to show inactive products/set products to inactive"
             app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintHorizontal_bias="0.481"
+            app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
@@ -128,14 +121,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="63dp"
             app:layout_constraintGuide_percent="0.0" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/second_top_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="277dp"
-            app:layout_constraintGuide_percent="0.33" />
 
     </android.support.constraint.ConstraintLayout>
 
