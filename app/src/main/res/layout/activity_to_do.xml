@@ -9,16 +9,17 @@
     android:background="@color/cardview_light_background">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:id="@+id/toolbar"
-            app:popupTheme="@style/Theme.AppCompat.Light"
-            android:elevation="4dp"/>
+            android:elevation="4dp"
+            app:popupTheme="@style/Theme.AppCompat.Light" />
 
         <FrameLayout
             android:id="@+id/fragment_container"
@@ -49,73 +50,77 @@
             android:selectAllOnFocus="true"
             android:text="Title"
             app:layout_constraintBottom_toTopOf="@+id/etNoteContent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.857" />
+            app:layout_constraintVertical_bias="0.887" />
 
         <EditText
             android:id="@+id/etNoteContent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="132dp"
             android:autoText="true"
             android:ems="10"
             android:inputType="textPersonName"
             android:selectAllOnFocus="true"
             android:text="Note Content"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/etNoteName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/etNoteName"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.204" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="176dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/custom_button"
             android:text="Save Note"
-            app:layout_constraintBottom_toTopOf="@+id/lvNote"
+            app:layout_constraintBottom_toTopOf="@+id/guideline15"
             app:layout_constraintEnd_toEndOf="@+id/etNoteContent"
-            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="@+id/etNoteContent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.536" />
+            app:layout_constraintTop_toBottomOf="@+id/etNoteContent" />
 
         <ListView
             android:id="@+id/lvNote"
-            android:layout_width="wrap_content"
-            android:layout_height="414dp"
+            android:layout_width="383dp"
+            android:layout_height="431dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:focusableInTouchMode="false"
             android:isScrollContainer="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@id/guideline_left"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/guideline_right"
-            app:layout_constraintVertical_bias="0.973" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline14"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/guideline15" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/guideline_left"
+            android:id="@+id/guideline13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="0dp"
-            app:layout_constraintGuide_percent="0.11" />
+            app:layout_constraintGuide_begin="4dp" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/guideline_right"
+            android:id="@+id/guideline14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="0dp"
-            app:layout_constraintGuide_percent="0.9"/>
+            app:layout_constraintGuide_begin="402dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="247dp" />
+
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
