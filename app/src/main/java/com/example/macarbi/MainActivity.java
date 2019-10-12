@@ -41,6 +41,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = null;
@@ -360,7 +362,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         double ctu = cpr + scr + iv;
                                         double ctc = Math.round(ctu + (ctu*0.3));
                                         String rand = String.format("%.2f", ctc);
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "NK\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
@@ -379,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         double ctu = cpr + scr + iv;
                                         double ctc = Math.round(ctu + (ctu*0.3));
                                         String rand = String.format("%.2f", ctc);
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "ActiveTools\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
@@ -387,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchName.add(i, dataSnapshot.child("Products").child("Concept 2").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("Concept 2").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("Concept 2").child(Integer.toString(i)).child("Stock").getValue(String.class));
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Concept 2\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
@@ -406,7 +409,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         double ctu = cpr + scr + iv;
                                         double ctc = Math.round(ctu + (ctu*0.3));
                                         String rand = String.format("%.2f", ctc);
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Coxmate\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
@@ -414,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchName.add(i, dataSnapshot.child("Products").child("Croker").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("Croker").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("Croker").child(Integer.toString(i)).child("Stock").getValue(String.class));
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Croker\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
@@ -422,7 +425,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchName.add(i, dataSnapshot.child("Products").child("Hudson").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("Hudson").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("Hudson").child(Integer.toString(i)).child("Stock").getValue(String.class));
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Hudson\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
@@ -430,7 +433,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchName.add(i, dataSnapshot.child("Products").child("Rowshop").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("Rowshop").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("Rowshop").child(Integer.toString(i)).child("Stock").getValue(String.class));
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "RowShop\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
@@ -438,7 +441,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchName.add(i, dataSnapshot.child("Products").child("Swift").child(Integer.toString(i)).child("Name").getValue(String.class));
                                         searchPrice.add(i, dataSnapshot.child("Products").child("Swift").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("Swift").child(Integer.toString(i)).child("Stock").getValue(String.class));
-                                        if (searchName.get(i).toLowerCase().contains(search.toLowerCase())) {
+                                        if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Swift\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
                                         }
                                     }
