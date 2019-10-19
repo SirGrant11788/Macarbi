@@ -262,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Log.d("THIS IS VAL", weight + "\t" + i + "");
                         shipping = dataSnapshot.child("Products").child(spValue).child("Shipping").getValue(Double.class);
                         Exchange = dataSnapshot.child("Products").child(spValue).child("Exchange Rate").getValue(Double.class);
+                        pQTY = dataSnapshot.child("Products").child(spValue).child("Stock").getValue(String.class);
 
                         double cpr = Double.parseDouble(pPrice) * Exchange;
                         double scd = weight * shipping;
