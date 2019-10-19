@@ -81,14 +81,28 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
         btnSaveEdit = (Button) findViewById(R.id.button_save_edit);
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
+                Toast.makeText(EditProduct.this, "EPID: "+id, Toast.LENGTH_SHORT).show();//todo delete Toast count
                 if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
-                update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
-                        id, Double.parseDouble(ETExchange.getText().toString()), Double.parseDouble(ETShipping.getText().toString()));
-                update.updateProd();
+//                update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
+//                        id, Double.parseDouble(ETExchange.getText().toString()), Double.parseDouble(ETShipping.getText().toString()));
+
+                    fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
+                    fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Price").setValue(ETprice.getText().toString());
+                    fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").setValue(ETqty.getText().toString());
+                    fdb.child("Products").child(Cat).child("Exchange Rate").setValue(ETExchange.getText().toString());
+                    fdb.child("Products").child(Cat).child("Shipping").setValue(ETShipping.getText().toString());
+//                update.updateProd();
                 } else {
-                    update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
-                            id);
-                    update.updateProdLocal();
+//                    update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
+//                            id);
+//                    update.updateProdLocal();
+
+
+                    fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
+                    fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Price").setValue(ETprice.getText().toString());
+                    fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").setValue(ETqty.getText().toString());
+                    fdb.child("Products").child(Cat).child("Exchange Rate").setValue(ETExchange.getText().toString());
+                    fdb.child("Products").child(Cat).child("Shipping").setValue(ETShipping.getText().toString());
                 }
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Regular price").setValue(ETprice.getText().toString());
@@ -202,8 +216,8 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                Toast.makeText(EditProduct.this, Integer.toString(id), Toast.LENGTH_LONG).show();
                pQTY = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").getValue(String.class);
                if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
-                   pExchange = dataSnapshot.child("Products").child(Cat).child("Exchange Rate").getValue(double.class).toString();
-                   pShipping = dataSnapshot.child("Products").child(Cat).child("Shipping").getValue(double.class).toString();
+                   pExchange = dataSnapshot.child("Products").child(Cat).child("Exchange Rate").getValue(String.class);
+                   pShipping = dataSnapshot.child("Products").child(Cat).child("Shipping").getValue(String.class);
                    ETExchange.setText(pExchange);
                    ETShipping.setText(pShipping);
                } else {
