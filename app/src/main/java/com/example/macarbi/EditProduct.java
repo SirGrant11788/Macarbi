@@ -94,7 +94,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Regular price").setValue(ETprice.getText().toString());
                 //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").setValue(ETqty.getText().toString());
                 // Start NewActivity.class
-
+                startActivity(new Intent(EditProduct.this, MainActivity.class));//exit to main page
             }
         });
         btnDelete = (Button) findViewById(R.id.button_delete);
@@ -102,6 +102,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onClick(View v) {
                 delete();
+                startActivity(new Intent(EditProduct.this, MainActivity.class));//exit to main page
             }
         });
         //--------------- Navigation Drawer -----------------------------
