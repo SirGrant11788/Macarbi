@@ -40,7 +40,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
     private DatabaseReference fdb;
     private FirebaseAuth fbAuth;
 
-    private String name, price, qty;
+    private String name, price, qty = "";
 
     private long childCount;
     private List<String> list1 = new ArrayList<String>();
@@ -50,15 +50,22 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         add = findViewById(R.id.button_add);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addProduct();
-            }
-        });
         pName = (TextView) findViewById(R.id.product_name);
         pPrice = (TextView) findViewById(R.id.product_price);
         pQuantity = (TextView) findViewById(R.id.product_quantity);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                       addProduct();
+
+
+
+            }
+        });
+
 
         pName.setHint("Name");
         pPrice.setHint("Price");
@@ -102,7 +109,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
                         DataSnapshot catSnapshot = dataSnapshot.child("Products");
                         Iterable<DataSnapshot> catChildren = catSnapshot.getChildren();
                         childCount = dataSnapshot.child("Products").child(String.valueOf(prod.getSelectedItem())).getChildrenCount();//gets the number of items in child for the for loop
-                        Toast.makeText(activity_add_product.this,Long.toString(childCount),Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(activity_add_product.this,Long.toString(childCount),Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -160,12 +167,17 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
 //        }
 
        if (prod.getSelectedItem().toString()!="Please select a category") {
-           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Name").setValue(name);
-           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Price").setValue(price);
-           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Stock").setValue(qty);
-           fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Weight").setValue("1");
+          // Toast.makeText(activity_add_product.this,pName.getText().toString(),Toast.LENGTH_SHORT).show();
+
+
+               fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Name").setValue(name);
+               fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Price").setValue(price);
+               fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Stock").setValue(qty);
+               fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Weight").setValue("1");
+           }
+
        }
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
