@@ -260,9 +260,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (spValue.equals("ActiveTools") || spValue.equals("Coxmate") || spValue.equals("NK")) {
                         weight = Double.parseDouble(dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Weight").getValue(String.class));
                         Log.d("THIS IS VAL", weight + "\t" + i + "");
-                        shipping = dataSnapshot.child("Products").child(spValue).child("Shipping").getValue(Double.class);
-                        Exchange = dataSnapshot.child("Products").child(spValue).child("Exchange Rate").getValue(Double.class);
-                        pQTY = dataSnapshot.child("Products").child(spValue).child("Stock").getValue(String.class);
+                        shipping = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Shipping").getValue(Double.class);
+                        Exchange = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Exchange Rate").getValue(Double.class);
+                        pQTY = dataSnapshot.child("Products").child(spValue).child(Integer.toString(i)).child("Stock").getValue(String.class);
 
                         double cpr = Double.parseDouble(pPrice) * Exchange;
                         double scd = weight * shipping;
