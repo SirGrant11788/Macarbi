@@ -353,8 +353,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchPrice.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         searchWeight.add(i, dataSnapshot.child("Products").child("NK").child(Integer.toString(i)).child("Weight").getValue(String.class));
-                                        double shippingSearch = dataSnapshot.child("Products").child("NK").child("Shipping").getValue(Double.class);
-                                        double ExchangeSearch = dataSnapshot.child("Products").child("NK").child("Exchange Rate").getValue(Double.class);
+                                        double shippingSearch = Double.parseDouble(dataSnapshot.child("Products").child("NK").child("Shipping").getValue(String.class));
+                                        double ExchangeSearch = Double.parseDouble(dataSnapshot.child("Products").child("NK").child("Exchange Rate").getValue(String.class));
 
                                         double cpr = Double.parseDouble(searchPrice.get(i)) * ExchangeSearch;
                                         double scd = Double.parseDouble(searchWeight.get(i)) * shippingSearch;
@@ -373,8 +373,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchPrice.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         searchWeight.add(i, dataSnapshot.child("Products").child("ActiveTools").child(Integer.toString(i)).child("Weight").getValue(String.class));
-                                        double shippingSearch = dataSnapshot.child("Products").child("ActiveTools").child("Shipping").getValue(Double.class);
-                                        double ExchangeSearch = dataSnapshot.child("Products").child("ActiveTools").child("Exchange Rate").getValue(Double.class);
+                                        double shippingSearch = Double.parseDouble(dataSnapshot.child("Products").child("ActiveTools").child("Shipping").getValue(String.class));
+                                        double ExchangeSearch = Double.parseDouble(dataSnapshot.child("Products").child("ActiveTools").child("Exchange Rate").getValue(String.class));
 
                                         double cpr = Double.parseDouble(searchPrice.get(i)) * ExchangeSearch;
                                         double scd = Double.parseDouble(searchWeight.get(i)) * shippingSearch;
@@ -400,8 +400,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchPrice.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Price").getValue(String.class));
                                         searchQty.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         searchWeight.add(i, dataSnapshot.child("Products").child("Coxmate").child(Integer.toString(i)).child("Weight").getValue(String.class));
-                                        double shippingSearch = dataSnapshot.child("Products").child("Coxmate").child("Shipping").getValue(Double.class);
-                                        double ExchangeSearch = dataSnapshot.child("Products").child("Coxmate").child("Exchange Rate").getValue(Double.class);
+                                        double shippingSearch = Double.parseDouble(dataSnapshot.child("Products").child("Coxmate").child("Shipping").getValue(String.class));
+                                        double ExchangeSearch = Double.parseDouble(dataSnapshot.child("Products").child("Coxmate").child("Exchange Rate").getValue(String.class));
 
                                         double cpr = Double.parseDouble(searchPrice.get(i)) * ExchangeSearch;
                                         double scd = Double.parseDouble(searchWeight.get(i)) * shippingSearch;
