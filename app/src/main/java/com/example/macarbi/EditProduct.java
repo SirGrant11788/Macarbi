@@ -81,7 +81,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
         btnSaveEdit = (Button) findViewById(R.id.button_save_edit);
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                Toast.makeText(EditProduct.this, "EPID: "+id, Toast.LENGTH_SHORT).show();//todo delete Toast count
+               // Toast.makeText(EditProduct.this, "EPID: "+id, Toast.LENGTH_SHORT).show();//todo delete Toast count
                 if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
 //                update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
 //                        id, Double.parseDouble(ETExchange.getText().toString()), Double.parseDouble(ETShipping.getText().toString()));
@@ -213,7 +213,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                 // whenever data at this location is updated.
                pName = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Name").getValue(String.class);
                pPrice = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Price").getValue(String.class);
-               Toast.makeText(EditProduct.this, Integer.toString(id), Toast.LENGTH_LONG).show();
+               //Toast.makeText(EditProduct.this, Integer.toString(id), Toast.LENGTH_LONG).show();
                pQTY = dataSnapshot.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").getValue(String.class);
                if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
                    pExchange = dataSnapshot.child("Products").child(Cat).child("Exchange Rate").getValue(String.class);

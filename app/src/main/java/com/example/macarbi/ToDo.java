@@ -95,7 +95,7 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
 
                 AlertDialog dialog = new AlertDialog.Builder(ToDo.this)
                         .setTitle("DELETE NOTE")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
