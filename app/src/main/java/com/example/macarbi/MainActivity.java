@@ -477,7 +477,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setNegativeButton("OK", null)
                 .create();
         dialog.show();
-
     }
 }
 /*cost price rands = dollar * exchange
