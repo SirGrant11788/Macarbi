@@ -106,15 +106,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sp = (Spinner) findViewById(R.id.spinner);
         View v = findViewById(R.id.lvContent);
 //
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
-                // Your code for item clicks
-                int p = pos;
-                EditProduct.Cat = spValue;
-                EditProduct.id = Integer.parseInt(name[p]);
-                startActivity(new Intent(MainActivity.this, EditProduct.class));
-            }
-        });
+        if (user!=null) {
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
+                    // Your code for item clicks
+                    int p = pos;
+                    EditProduct.Cat = spValue;
+                    EditProduct.id = Integer.parseInt(name[p]);
+
+                    startActivity(new Intent(MainActivity.this, EditProduct.class));
+                }
+            });
+        }
         //Gets selected category from spinner
         fdb.addValueEventListener(new ValueEventListener() {
             @Override
