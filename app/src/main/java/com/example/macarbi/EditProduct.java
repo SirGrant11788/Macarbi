@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -233,7 +234,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-
+Log.d("PopUp","pop up error: \n"+error);
             }
         });
     }
