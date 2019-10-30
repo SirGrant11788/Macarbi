@@ -458,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             });
                         } catch (Exception ex) {
-                            Log.d("SEARCH", "EXCEPTION: " + ex);
+                            Log.d("SEARCH", " search EXCEPTION: " + ex);
                         }
 //
                     }
@@ -470,13 +470,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void showAddItemDialogResult(Context c) {
-
+        try {
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle("SEARCH RESULT")
                 .setMessage(searchResult)
                 .setNegativeButton("OK", null)
                 .create();
         dialog.show();
+        } catch (Exception ex) {
+            Log.d("PopUp", "Result EXCEPTION: " + ex);
+        }
     }
 }
 /*cost price rands = dollar * exchange
