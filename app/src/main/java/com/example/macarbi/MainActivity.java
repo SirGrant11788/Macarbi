@@ -500,14 +500,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void showAddItemDialogResult(Context c) {
         try {
             final CharSequence[] cs = searchResultList.toArray(new CharSequence[searchResultList.size()]);
-
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(search);
             builder.setItems(cs, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
-                    // Do something with the selection
-                    //Toast.makeText(MainActivity.this," "+cs[item],Toast.LENGTH_SHORT).show();
-
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
                     sendIntent.putExtra(Intent.EXTRA_TEXT, cs[item]);
@@ -518,12 +514,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
             AlertDialog alert = builder.create();
             alert.show();
-//        AlertDialog dialog = new AlertDialog.Builder(c)
-//                .setTitle("SEARCH RESULT")
-//                .setMessage(searchResult)
-//                .setNegativeButton("OK", null)
-//                .create();
-//        dialog.show();
         } catch (Exception ex) {
             Log.d("PopUp", "Result EXCEPTION: " + ex);
         }

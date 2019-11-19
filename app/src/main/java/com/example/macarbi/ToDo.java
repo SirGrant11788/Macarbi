@@ -1,9 +1,12 @@
 package com.example.macarbi;
 
+import android.app.Notification;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +25,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+//import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,11 +44,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.macarbi.Push.TODO_1_ID;//push
+
 public class ToDo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private DatabaseReference fdb;
     private FirebaseAuth fbAuth;
+    private NotificationManagerCompat notificationManager;//push
     Button btn;
     EditText et1;
     EditText et2;
@@ -65,6 +76,7 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
         fbAuth = FirebaseAuth.getInstance();
         fbAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fbAuth.getCurrentUser();
+        notificationManager = NotificationManagerCompat.from(this);//push
         if (user != null) {
 
         } else {
@@ -84,6 +96,23 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View view) {
                 saveNote();
+                //push start
+                String title = et1.getText().toString();
+                String message = et2.getText().toString();
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(ToDo.this, TODO_1_ID);
+                builder.setSmallIcon(R.drawable.macarbi3);
+                builder.setContentTitle(title);
+                builder.setContentText(message);
+                builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+                builder.setCategory(NotificationCompat.CATEGORY_MESSAGE);
+                Notification notification = builder
+                        .build();
+
+                notificationManager.notify(1, notification);
+                //push end
+                et1.setText("");
+                et2.setText("");
             }
         });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,7 +136,7 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
                                 child = sb.toString();
                                 deleteNote();
                                 //fdb.child("Notes").child(child).child("Contents").setValue("Test");
-                                Toast.makeText(ToDo.this, "|" +child + "|", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ToDo.this, "" +child + " deleted", Toast.LENGTH_LONG).show();
 
                             }})
                         .setNegativeButton("Cancel", null)
@@ -141,6 +170,12 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
         //------------------------------------------------------------------
 
     }
+    /**
+     * Called if InstanceID token is updated. This may occur if the security of
+     * the previous token had been compromised. Note that this is called when the InstanceID token
+     * is initially generated so this is where you would retrieve the token.
+     */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (toggle.onOptionsItemSelected(item))

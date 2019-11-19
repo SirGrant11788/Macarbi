@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "716478080440-t82vpbnobe5qumapdmoc1qd0ij9ghmgt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.macarbi",
+            "certificate_hash": "94d31b0b32711a365b5043c5e8195a020543440d"
+          }
+        },
+        {
+          "client_id": "716478080440-835ngqk5mk926r6ldmq2kd3id453eqqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.macarbi",
+            "certificate_hash": "35f920c04ceaba5c410fb66271ca8e11b69978e2"
+          }
+        },
+        {
           "client_id": "716478080440-4tnt140faamla0967d1m35c5r9tmdmrt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
