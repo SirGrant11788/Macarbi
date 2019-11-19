@@ -84,7 +84,7 @@
             android:layout_width="362dp"
             android:layout_height="44dp"
             android:layout_marginStart="16dp"
-            android:text="Check to show inactive products/set products to inactive"
+            android:text="Check to show inactive products"
             app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
             app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
