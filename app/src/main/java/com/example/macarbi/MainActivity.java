@@ -109,13 +109,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> list, View v, int pos, long id) {
                 int p = pos;
-                //Toast.makeText(MainActivity.this,lv.getItemAtPosition(p).toString()+ " LONG PRESS", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this,lv.getItemAtPosition(p).toString().replaceAll("First Line="," ").replaceAll("Second Line="," ").replace('{',' ').replace('}',' ')+ " \nLONG PRESS", Toast.LENGTH_LONG).show();
                 //share to
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, lv.getItemAtPosition(p).toString());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, lv.getItemAtPosition(p).toString().replaceAll("First Line="," ").replaceAll("Second Line="," ").replace('{',' ').replace('}',' '));
                 sendIntent.setType("text/plain");
-
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
 
