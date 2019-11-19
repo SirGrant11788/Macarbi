@@ -1,6 +1,7 @@
 package com.example.macarbi;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -56,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String pName;
     String PR;
     String pPrice;
-    String search, searchResult="";
+    String search, searchResult="";//search
+    List<String> searchResultList=new ArrayList<String>();//search
     private double Exchange, rands, weight, shipping;
     String pQTY;
     ListView lv;
@@ -386,6 +389,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "NK\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("NK\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     for (int i = 0; i <= (int) childCountActiveTools - 3; i++) {
@@ -405,6 +409,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         String rand = String.format("%.2f", ctc);
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "ActiveTools\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("ActiveTools\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     for (int i = 0; i <= childCountConcept2 - 3; i++) {
@@ -413,6 +418,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchQty.add(i, dataSnapshot.child("Products").child("Concept 2").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Concept 2\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("Concept 2\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     for (int i = 0; i <= childCountCoxmate - 3; i++) {
@@ -432,6 +438,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         String rand = String.format("%.2f", ctc);
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Coxmate\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("Coxmate\n" + searchName.get(i) + "\nR" + rand + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     for (int i = 0; i <= childCountCroker - 3; i++) {
@@ -440,6 +447,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchQty.add(i, dataSnapshot.child("Products").child("Croker").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Croker\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("Croker\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     for (int i = 0; i <= childCountHudson - 3; i++) {
@@ -448,6 +456,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchQty.add(i, dataSnapshot.child("Products").child("Hudson").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Hudson\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("Hudson\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     for (int i = 0; i <= childCountRowshop - 3; i++) {
@@ -456,6 +465,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchQty.add(i, dataSnapshot.child("Products").child("Rowshop").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "RowShop\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("RowShop\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     for (int i = 0; i <= childCountSwift - 3; i++) {
@@ -464,6 +474,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         searchQty.add(i, dataSnapshot.child("Products").child("Swift").child(Integer.toString(i)).child("Stock").getValue(String.class));
                                         if (searchName.get(i).toLowerCase().replace(" ","").contains(search.toLowerCase().replace(" ",""))) {
                                             searchResult += "Swift\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i) + "\n-------------------\n";
+                                            searchResultList.add("Swift\n" + searchName.get(i) + "\nR" + searchPrice.get(i) + "\nQTY:" + searchQty.get(i)+"\n");
                                         }
                                     }
                                     showAddItemDialogResult(MainActivity.this);
@@ -488,16 +499,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void showAddItemDialogResult(Context c) {
         try {
-        AlertDialog dialog = new AlertDialog.Builder(c)
-                .setTitle("SEARCH RESULT")
-                .setMessage(searchResult)
-                .setNegativeButton("OK", null)
-                .create();
-        dialog.show();
+            final CharSequence[] cs = searchResultList.toArray(new CharSequence[searchResultList.size()]);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(search);
+            builder.setItems(cs, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    // Do something with the selection
+                    //Toast.makeText(MainActivity.this," "+cs[item],Toast.LENGTH_SHORT).show();
+
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, cs[item]);
+                    sendIntent.setType("text/plain");
+                    Intent shareIntent = Intent.createChooser(sendIntent, null);
+                    startActivity(shareIntent);
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+//        AlertDialog dialog = new AlertDialog.Builder(c)
+//                .setTitle("SEARCH RESULT")
+//                .setMessage(searchResult)
+//                .setNegativeButton("OK", null)
+//                .create();
+//        dialog.show();
         } catch (Exception ex) {
             Log.d("PopUp", "Result EXCEPTION: " + ex);
         }
     }
+
 }
 /*cost price rands = dollar * exchange
 shipping cost dollar = weight * shipping (dollars)
