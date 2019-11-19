@@ -33,14 +33,14 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private Button add;
-    private TextView pName, pPrice, pQuantity;
+    private TextView pName, pPrice, pQuantity, pWeight;
     private Spinner prod;
     private AUD_Prod save;
     private String Cat;
     private DatabaseReference fdb;
     private FirebaseAuth fbAuth;
 
-    private String name, price, qty = "";
+    private String name, price, qty, weight = "";
 
     private long childCount;
     private List<String> list1 = new ArrayList<String>();
@@ -53,6 +53,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
         pName = (TextView) findViewById(R.id.product_name);
         pPrice = (TextView) findViewById(R.id.product_price);
         pQuantity = (TextView) findViewById(R.id.product_quantity);
+        pWeight = (TextView) findViewById(R.id.product_weight);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +71,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
         pName.setHint("Name");
         pPrice.setHint("Price");
         pQuantity.setHint("Quantity");
+        pWeight.setHint("Weight");
         fdb = FirebaseDatabase.getInstance().getReference();
         fbAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fbAuth.getCurrentUser();
@@ -156,6 +158,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
         name = pName.getText().toString();
         price = pPrice.getText().toString();
         qty = pQuantity.getText().toString();
+        weight = pWeight.getText().toString();
 
 
 //        if(!prod.getSelectedItem().toString().equals("Please select a category")) {
@@ -173,7 +176,16 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
                fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Name").setValue(name);
                fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Price").setValue(price);
                fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Stock").setValue(qty);
-               fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Weight").setValue("1");
+               fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Weight").setValue(weight);
+           Toast.makeText(activity_add_product.this,name+" added",Toast.LENGTH_SHORT).show();
+           pName.setText("");
+           pPrice.setText("");
+           pQuantity.setText("");
+           pWeight.setText("");
+//           pName.setHint("Name");
+//           pPrice.setHint("Price");
+//           pQuantity.setHint("Quantity");
+//           pWeight.setHint("Weight");
            }
 
        }
