@@ -28,6 +28,8 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +37,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,6 +82,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         setContentView(R.layout.activity_main);
         inactive = findViewById(R.id.checkbox_show_inactive);
          //tracking the sign in and singn out operations
@@ -136,6 +143,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("Notes")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+//                        String msg = getString(R.string.msg_subscribed);
+                        if (!task.isSuccessful()) {
+//                            msg = getString(R.string.msg_subscribe_failed);
+                        }
+//                        Log.d(TAG, msg);
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         //Gets selected category from spinner
         fdb.addValueEventListener(new ValueEventListener() {
@@ -518,6 +538,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("PopUp", "Result EXCEPTION: " + ex);
         }
     }
+
+
 
 }
 /*cost price rands = dollar * exchange

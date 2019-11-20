@@ -100,16 +100,16 @@ public class ToDo extends AppCompatActivity implements NavigationView.OnNavigati
                 String title = et1.getText().toString();
                 String message = et2.getText().toString();
 
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(ToDo.this, TODO_1_ID);
-                builder.setSmallIcon(R.drawable.macarbi3);
-                builder.setContentTitle(title);
-                builder.setContentText(message);
-                builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-                builder.setCategory(NotificationCompat.CATEGORY_MESSAGE);
-                Notification notification = builder
-                        .build();
-
-                notificationManager.notify(1, notification);
+//                NotificationCompat.Builder builder = new NotificationCompat.Builder(ToDo.this, TODO_1_ID);
+//                builder.setSmallIcon(R.drawable.macarbi3);
+//                builder.setContentTitle(title);
+//                builder.setContentText(message);
+//                builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+//                builder.setCategory(NotificationCompat.CATEGORY_MESSAGE);
+//                Notification notification = builder
+//                        .build();
+//
+//                notificationManager.notify(1, notification);
                 //push end
                 et1.setText("");
                 et2.setText("");
