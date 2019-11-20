@@ -16,8 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,14 +38,12 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
     String pQTY;
     String pExchange;
     String pShipping;
-
     TextView tvProduct;
     EditText ETprice;
     EditText ETqty;
     EditText ETExchange;
     EditText ETShipping;
     Button   btnSaveEdit, btnDelete;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,34 +66,22 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
-            //MenuItem edit = menuNav.findItem(R.id.nav_currency);
-            // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
             //todo.setEnabled(false);
             Add.setEnabled(false);
-            //edit.setEnabled(false);
         }
         read();
         bsp = findViewById(R.id.brand_spinner);
         btnSaveEdit = (Button) findViewById(R.id.button_save_edit);
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-               // Toast.makeText(EditProduct.this, "EPID: "+id, Toast.LENGTH_SHORT).show();//todo delete Toast count
                 if(Cat.equals("ActiveTools") || Cat.equals("Coxmate") || Cat.equals("NK")) {
-//                update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
-//                        id, Double.parseDouble(ETExchange.getText().toString()), Double.parseDouble(ETShipping.getText().toString()));
-
                     fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
                     fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Price").setValue(ETprice.getText().toString());
                     fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").setValue(ETqty.getText().toString());
                     fdb.child("Products").child(Cat).child("Exchange Rate").setValue(ETExchange.getText().toString());
                     fdb.child("Products").child(Cat).child("Shipping").setValue(ETShipping.getText().toString());
-//                update.updateProd();
                 } else {
-//                    update = new AUD_Prod(Cat, tvProduct.getText().toString(), ETprice.getText().toString(), Integer.parseInt(ETqty.getText().toString()),
-//                            id);
-//                    update.updateProdLocal();
-
 
                     fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
                     fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Price").setValue(ETprice.getText().toString());
@@ -105,10 +89,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                     fdb.child("Products").child(Cat).child("Exchange Rate").setValue(ETExchange.getText().toString());
                     fdb.child("Products").child(Cat).child("Shipping").setValue(ETShipping.getText().toString());
                 }
-                //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Name").setValue(tvProduct.getText().toString());
-                //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Regular price").setValue(ETprice.getText().toString());
-                //fdb.child("Products").child(Cat).child(Integer.toString(id)).child("Stock").setValue(ETqty.getText().toString());
-                // Start NewActivity.class
+
                 startActivity(new Intent(EditProduct.this, MainActivity.class));//exit to main page
             }
         });
@@ -159,12 +140,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             startActivity(new Intent(EditProduct.this, MainActivity.class));
             finish();
         }
-//        if(id==R.id.nav_currency)
-//        {
-//            fbAuth.getInstance().signOut();
-//            startActivity(new Intent(EditProduct.this, activity_currency.class));
-//            finish();
-//        }
+
         if(id==R.id.nav_invoices)
         {
             startActivity(new Intent(EditProduct.this, Invoices.class));
@@ -192,11 +168,6 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
             finish();
         }
 
-//        if(id==R.id.nav_currency)
-//        {
-//           // startActivity(new Intent(EditProduct.this, activity_currency.class));
-//            finish();
-//        }
         if(id==R.id.nav_add_prod)
         {
             startActivity(new Intent(EditProduct.this, activity_add_product.class));
@@ -204,7 +175,6 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
         }
         return false;
     }
-
 
     private void read() {
         fdb.addValueEventListener(new ValueEventListener() {
@@ -228,9 +198,7 @@ public class EditProduct extends AppCompatActivity implements NavigationView.OnN
                 tvProduct.setText(pName);
                 ETprice.setText(pPrice);
                 ETqty.setText(pQTY);
-
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
@@ -243,5 +211,4 @@ Log.d("PopUp","pop up error: \n"+error);
         update = new AUD_Prod(tvProduct.getText().toString(), Cat, id);
         update.deleteProd();
     }
-
 }

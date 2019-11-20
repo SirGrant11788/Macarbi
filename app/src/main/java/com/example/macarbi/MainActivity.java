@@ -1,7 +1,6 @@
 package com.example.macarbi;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,8 +25,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,16 +35,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = null;
@@ -83,9 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         setContentView(R.layout.activity_main);
         inactive = findViewById(R.id.checkbox_show_inactive);
          //tracking the sign in and singn out operations
@@ -101,12 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
-           // MenuItem edit = menuNav.findItem(R.id.nav_currency);
-            // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
-            //todo.setEnabled(false);
+
             Add.setEnabled(false);
-           // edit.setEnabled(false);
 
         }
         lv = (ListView) findViewById(R.id.lvHome);
@@ -119,15 +106,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> list, View v, int pos, long id) {
                 int p = pos;
-                //Toast.makeText(MainActivity.this,lv.getItemAtPosition(p).toString().replaceAll("First Line="," ").replaceAll("Second Line="," ").replace('{',' ').replace('}',' ')+ " \nLONG PRESS", Toast.LENGTH_LONG).show();
-                //share to
+                //share to start
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, lv.getItemAtPosition(p).toString().replaceAll("First Line="," ").replaceAll("Second Line="," ").replace('{',' ').replace('}',' '));
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
-
+                //share to end
                 return true;
             }
         });
@@ -148,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-//                        String msg = getString(R.string.msg_subscribed);
                         if (!task.isSuccessful()) {
 //                            msg = getString(R.string.msg_subscribe_failed);
                         }

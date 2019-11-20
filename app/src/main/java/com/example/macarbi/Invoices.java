@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,7 +22,6 @@ public class Invoices extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoices);
         fbAuth = FirebaseAuth.getInstance();
-
         fbAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fbAuth.getCurrentUser();
         if (user != null) {
@@ -34,14 +32,9 @@ public class Invoices extends AppCompatActivity implements NavigationView.OnNavi
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
-            //MenuItem edit = menuNav.findItem(R.id.nav_currency);
-            // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
-            //todo.setEnabled(false);
             Add.setEnabled(false);
-           // edit.setEnabled(false);
         }
-
 
         //--------------- Navigation Drawer -----------------------------
 
@@ -50,13 +43,10 @@ public class Invoices extends AppCompatActivity implements NavigationView.OnNavi
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle("");
         toolbar.setSubtitle("");
-
         drawer = findViewById(R.id.drawer_layout);
-
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
 
         NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
@@ -82,8 +72,6 @@ public class Invoices extends AppCompatActivity implements NavigationView.OnNavi
             finish();
         }
 
-
-
         if(id==R.id.nav_lr)
         {
             startActivity(new Intent(Invoices.this, Login.class));
@@ -108,11 +96,6 @@ public class Invoices extends AppCompatActivity implements NavigationView.OnNavi
             finish();
         }
 
-//        if(id==R.id.nav_currency)
-//        {
-//            //startActivity(new Intent(Invoices.this, activity_currency.class));
-//            finish();
-//        }
         if(id==R.id.nav_add_prod)
         {
             startActivity(new Intent(Invoices.this, activity_add_product.class));

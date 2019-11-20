@@ -112,29 +112,19 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
 
         if(id==R.id.nav_Home)
         {
-
-
-
-
             startActivity(new Intent(Register.this, MainActivity.class));
             finish();
 
         }
 
-
         if(id==R.id.nav_invoices)
         {
-
-
             startActivity(new Intent(Register.this, Invoices.class));
             finish();
         }
 
         if(id==R.id.nav_lr)
         {
-
-
-
 
             startActivity(new Intent(Register.this, Login.class));
             finish();
@@ -144,9 +134,6 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
         if(id==R.id.nav_todo)
         {
 
-
-
-
             startActivity(new Intent(Register.this, ToDo.class));
             finish();
 
@@ -154,10 +141,6 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
 
         if(id==R.id.nav_website)
         {
-
-
-
-
             startActivity(new Intent(Register.this, Website.class));
             finish();
 
@@ -168,18 +151,12 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Register.this, MainActivity.class));
             finish();
         }
-//        if(id==R.id.nav_currency)
-//        {
-//            startActivity(new Intent(Register.this, activity_currency.class));
-//            finish();
-//        }
+
         if(id==R.id.nav_add_prod)
         {
             startActivity(new Intent(Register.this, activity_add_product.class));
             finish();
         }
-
-
 
         return false;
     }
@@ -189,18 +166,11 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
-
-
-
         if (TextUtils.isEmpty(email)||TextUtils.isEmpty(password))
         {
             Toast.makeText(this, "all fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
-
-
 
         progressDialog.setMessage("Registering new user...");
         progressDialog.show();
@@ -209,14 +179,7 @@ public class Register extends AppCompatActivity implements NavigationView.OnNavi
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
 
-
-
-
-
-
-
                     Toast.makeText(Register.this,"User Registered Successfully", Toast.LENGTH_SHORT).show();
-
 
                     startActivity(new Intent(Register.this, MainActivity.class));
                     finish();

@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -43,17 +41,6 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
     protected void onCreate(Bundle savedInstanceState) {
         fbAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fbAuth.getCurrentUser();
-        //if (user != null) {
-
-        //} else {
-        //    NavigationView navigationView= findViewById(R.id.nav_view);
-        //    Menu menuNav=navigationView.getMenu();
-        //    MenuItem inv = menuNav.findItem(R.id.nav_invoices);
-        //    MenuItem todo = menuNav.findItem(R.id.nav_todo);
-            // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
-        //    inv.setEnabled(false);
-        //    todo.setEnabled(false);
-        //}
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -67,7 +54,6 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 UserLogin();
-                // Start NewActivity.class
             }
         });
 
@@ -81,7 +67,6 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
             }
         });
 
-
         FirebaseUser usercheck = fbAuth.getCurrentUser();
         if (usercheck != null) {
 
@@ -91,12 +76,9 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
             MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             MenuItem todo = menuNav.findItem(R.id.nav_todo);
             MenuItem Add = menuNav.findItem(R.id.nav_add_prod);
-           // MenuItem edit = menuNav.findItem(R.id.nav_currency);
-            // MenuItem inv = menuNav.findItem(R.id.nav_invoices);
             inv.setEnabled(false);
             todo.setEnabled(false);
             Add.setEnabled(false);
-          //  edit.setEnabled(false);
             btnRegister.setEnabled(false);
         }
 
@@ -159,11 +141,7 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
         }
-//        if(id==R.id.nav_currency)
-//        {
-//           // startActivity(new Intent(Login.this, activity_currency.class));
-//            finish();
-//        }
+
         if(id==R.id.nav_add_prod)
         {
             startActivity(new Intent(Login.this, activity_add_product.class));
@@ -171,8 +149,6 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
         }
         return false;
     }
-
-
 
     private void UserLogin()
     {

@@ -39,9 +39,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
     private String Cat;
     private DatabaseReference fdb;
     private FirebaseAuth fbAuth;
-
     private String name, price, qty, weight = "";
-
     private long childCount;
     private List<String> list1 = new ArrayList<String>();
 
@@ -58,15 +56,10 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
             @Override
             public void onClick(View v) {
 
-
-
                        addProduct();
-
-
 
             }
         });
-
 
         pName.setHint("Name");
         pPrice.setHint("Price");
@@ -76,7 +69,6 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
         fbAuth = FirebaseAuth.getInstance();
         FirebaseUser user = fbAuth.getCurrentUser();
         if (user != null) {
-
         } else {
             NavigationView navigationView= findViewById(R.id.nav_view);
             Menu menuNav=navigationView.getMenu();
@@ -111,7 +103,6 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
                         DataSnapshot catSnapshot = dataSnapshot.child("Products");
                         Iterable<DataSnapshot> catChildren = catSnapshot.getChildren();
                         childCount = dataSnapshot.child("Products").child(String.valueOf(prod.getSelectedItem())).getChildrenCount();//gets the number of items in child for the for loop
-                      //  Toast.makeText(activity_add_product.this,Long.toString(childCount),Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -154,24 +145,12 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
 
     private void addProduct(){
 
-
         name = pName.getText().toString();
         price = pPrice.getText().toString();
         qty = pQuantity.getText().toString();
         weight = pWeight.getText().toString();
 
-
-//        if(!prod.getSelectedItem().toString().equals("Please select a category")) {
-//            save = new AUD_Prod(prod.getSelectedItem().toString(), pName.getText().toString(), pPrice.getText().toString(), Integer.parseInt(pQuantity.getText().toString()), childCount);
-//            save.writeProd();
-//        } else {
-//            for (int i = 0; i<1; i++)
-//            Toast.makeText(activity_add_product.this,"Please select a category",Toast.LENGTH_SHORT).show();
-//        }
-
        if (prod.getSelectedItem().toString()!="Please select a category") {
-          // Toast.makeText(activity_add_product.this,pName.getText().toString(),Toast.LENGTH_SHORT).show();
-
 
                fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Name").setValue(name);
                fdb.child("Products").child(prod.getSelectedItem().toString()).child(Long.toString(childCount - 2)).child("Price").setValue(price);
@@ -182,14 +161,8 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
            pPrice.setText("");
            pQuantity.setText("");
            pWeight.setText("");
-//           pName.setHint("Name");
-//           pPrice.setHint("Price");
-//           pQuantity.setHint("Quantity");
-//           pWeight.setHint("Weight");
            }
-
        }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -233,16 +206,7 @@ public class activity_add_product extends AppCompatActivity implements Navigatio
             startActivity(new Intent(activity_add_product.this, MainActivity.class));
             finish();
         }
-//        if(id==R.id.nav_currency)
-//        {
-//            startActivity(new Intent(activity_add_product.this, activity_currency.class));
-//            finish();
-//        }
-//        if(id==R.id.nav_add_prod)
-//        {
-//            startActivity(new Intent(activity_add_product.this, activity_add_product.class));
-//            finish();
-//        }
+
         return false;
     }
 
